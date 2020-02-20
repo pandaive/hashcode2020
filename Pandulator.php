@@ -70,10 +70,35 @@ foreach ($librariesToBooks as $libId => $bookIds) {
     $librariesToFinalScore[$libId] = $sumScores / ($libraries[$libId]->onboardingTime + count($bookIds) / $libraries[$libId]->booksPerDay);
 
 }
-
-$librariesSortedForQueue = array_keys(arsort($librariesToFinalScore));
+arsort($librariesToFinalScore);
+$librariesSortedForQueue = array_keys($librariesToFinalScore);
 $libraryQueue = [];
 foreach ($librariesSortedForQueue as $libId) {
     $libraryQueue[$libId] = $librariesToBooks[$libId];
 }
+
+$sumOnboarding = 0;
+foreach($libraryQueue as $libId => $books) {
+    $libraries[$libId]->onboardingTime += $sumOnboarding;
+    $sumOnboarding = $libraries[$libId]->onboardingTime;
+    echo "Sum onboarding $sumOnboarding";
+}
+
+$DAYSMAX = 3;
+$booksScanned = [];
+foreach ($libraryQueue as $libId => $books) {
+    echo " Lib id: $libId\n";
+    echo "\n";
+    if ($libraries[$libId]->onboardingTime < $DAYSMAX) {
+        $booksLeft = ($DAYSMAX - $libraries[$libId]->onboardingTime) * $libraries[$libId]->booksPerDay;
+        $numBooksScanned = count($books) < $booksLeft ? count($books) : $booksLeft;
+        for ($i = 0; $i < $numBooksScanned; $i++) {
+            $booksScanned[] = $books[$i];
+        }
+    }
+}
+
+print_r($booksScanned);
+
+
 
