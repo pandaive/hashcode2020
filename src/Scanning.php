@@ -10,7 +10,7 @@ class Scanning {
 
     public function __construct(int $days, array $booksToScores, array $libraries) {
         $this->days = $days;
-        $this->booksToScored = $booksToScores;
+        $this->booksToScores = $booksToScores;
         $this->libraries = $libraries;
     }
 
