@@ -48,4 +48,16 @@ class Scanning {
         return new Scanning($days, $booksToScores, $libraries);
     }
 
+    public static function save(array $libraryToBooksQueue, string $file) {
+
+        $output = count($libraryToBooksQueue) . " \n";
+
+        foreach ($libraryToBooksQueue as $libraryId => $bookIds) {
+            $output .= $libraryId . " " . count($bookIds) . "\n";
+            $output .= implode(" ", $bookIds) . "\n";
+        }
+
+        file_put_contents($file, $output);
+    }
+
 }

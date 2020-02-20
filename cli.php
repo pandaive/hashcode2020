@@ -4,18 +4,20 @@
 require "vendor/autoload.php";
 
 // check if argument passed
-if ($argc < 2) {
-    fwrite(STDERR, "Expected 1 argument\n");
+if ($argc < 3) {
+    fwrite(STDERR, "Expected 2 argument\n");
     exit -1;
 }
 
 // check if file exists
 $input = $argv[1];
+$output = $argv[2];
 if (!file_exists($input)) {
     fwrite(STDERR, "File {$input} not found\n");
     exit -1;
 }
 
-// load input file
+// load-transform-store
 $scanning = Scanning::load($input);
-
+$queue = []; // do something
+Scanning::save($queue, $output);
