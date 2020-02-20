@@ -1,29 +1,5 @@
 <?php
 
-class Library {
-    public $onboardingTime = 0;
-    public $bookIds = [];
-    public $booksPerDay = 0;
-
-    function __construct(int $onboardingTime, array $bookIds, int $booksPerDay) {
-        $this->onboardingTime = $onboardingTime;
-        $this->bookIds = $bookIds;
-        $this->booksPerDay = $booksPerDay;
-    }
-}
-
-$booksToScores = [
-    "0" => 1,
-    "1" => 2,
-    "2" => 3,
-    "3" => 4,
-    "4" => 5,
-    "5" => 6
-];
-
-$lib1 = new Library(2, [0, 1, 2], 2);
-$lib2 = new Library(10, [2, 3, 4], 1);
-$libraries = [$lib1, $lib2];
 $libraryScores = [];
 $booksToLibraries = [];
 foreach ($libraries as $key => $library) {

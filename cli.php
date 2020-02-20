@@ -19,5 +19,7 @@ if (!file_exists($input)) {
 
 // load-transform-store
 $scanning = Scanning::load($input);
-$queue = []; // do something
-Scanning::save($queue, $output);
+$booksToScores = $scanning->booksToScores;
+$libraries = $scanning->libraries;
+require "src/Calculator.php";
+Scanning::save($librariesSortedForQueue, $output);
