@@ -9,7 +9,7 @@ class Scanning {
 
     const DELIMITER = " ";
 
-    public function __construct(integer $days, array $booksToScores, array $libraries) {
+    public function __construct(int $days, array $booksToScores, array $libraries) {
         $this->days = $days;
         $this->booksToScored = $booksToScores;
         $this->libraries = $libraries;
@@ -21,15 +21,24 @@ class Scanning {
 
         // load books count, libraries count, days
         list($booksCount, $librariesCount, $days) = fscanf($h, "%d %d %d");
+        echo "Got $booksCount books in $librariesCount libraries, $days days to go\n";
 
         // load scores
         $booksToScores = fgetcsv($h, 0, self::DELIMITER);
+        echo "Book scores: " . implode(", ", $booksToScores) . "\n";
 
         // load libraries
         $libraries = [];
         while (!feof($h)) {
-            list($booksInLibraryCount, $onboardingTime, $booksPerDay) = fgetcsv($h, "%d %d %d");
+            // read library properties
+            list($booksInLibraryCount, $onboardingTime, $booksPerDay) = fscanf($h, "%d %d %d");
+            if (!$booksInLibraryCount or !$onboardingTime or !$booksPerDay) break;
+            echo "Read $booksInLibraryCount books in library, onboarding time is $onboardingTime, with $booksPerDay books per day processing capacity\n";
+
+            // read books in library
             $booksInLibrary = fgetcsv($h, 0, self::DELIMITER);
+            echo "Book ids: " . implode(", ", $booksInLibrary) . "\n";
+            if (!$booksInLibrary) break;
             if ($booksInLibraryCount !== count($booksInLibrary)) {
                 throw new Exception("Reading library expected to get {$booksInLibraryCount} books but read {count($booksInLibrary)} items");
             }
