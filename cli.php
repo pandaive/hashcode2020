@@ -2,6 +2,7 @@
 <?php
 
 require "vendor/autoload.php";
+require "src/Calculator.php";
 
 // check if argument passed
 if ($argc < 3) {
@@ -19,7 +20,5 @@ if (!file_exists($input)) {
 
 // load-transform-store
 $scanning = Scanning::load($input);
-$booksToScores = $scanning->booksToScores;
-$libraries = $scanning->libraries;
-require "src/Calculator.php";
-Scanning::save($librariesSortedForQueue, $output);
+$result = calculate($scanning->booksToScores, $scanning->libraries, $scanning->days);
+Scanning::save($result, $output);

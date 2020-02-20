@@ -3,7 +3,6 @@
 class Scanning {
 
     public $days = 0;
-
     public $booksToScores = [];
     public $libraries = [];
 

@@ -1,5 +1,7 @@
 <?php
 
+function calculate($booksToScores, $libraries, $days) {
+
 $libraryScores = [];
 $booksToLibraries = [];
 foreach ($libraries as $key => $library) {
@@ -47,9 +49,13 @@ foreach ($librariesToBooks as $libId => $bookIds) {
 
 }
 
-$librariesSortedForQueue = array_keys(arsort($librariesToFinalScore));
+arsort($librariesToFinalScore);
+$librariesSortedForQueue = array_keys($librariesToFinalScore);
 $libraryQueue = [];
 foreach ($librariesSortedForQueue as $libId) {
     $libraryQueue[$libId] = $librariesToBooks[$libId];
 }
 
+return $libraryQueue;
+
+}
