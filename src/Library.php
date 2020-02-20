@@ -2,8 +2,13 @@
 
 class Library {
 
+    public $bookIds = [];
     public $onboardingTime = 0;
     public $booksPerDay = 0;
-    public $bookIds = [];
 
+    public function __construct(array $bookIds, int $onboardingTime, int $booksPerDay) {
+        $this->bookIds = $bookIds;
+        $this->onboardingTime = $onboardingTime;
+        $this->booksPerDay = $booksPerDay;
+    }
 }

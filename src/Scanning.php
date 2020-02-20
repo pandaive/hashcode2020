@@ -3,7 +3,6 @@
 class Scanning {
 
     public $days = 0;
-
     public $booksToScores = [];
     public $libraries = [];
 
@@ -11,7 +10,7 @@ class Scanning {
 
     public function __construct(int $days, array $booksToScores, array $libraries) {
         $this->days = $days;
-        $this->booksToScored = $booksToScores;
+        $this->booksToScores = $booksToScores;
         $this->libraries = $libraries;
     }
 
@@ -46,6 +45,18 @@ class Scanning {
         }
 
         return new Scanning($days, $booksToScores, $libraries);
+    }
+
+    public static function save(array $libraryToBooksQueue, string $file) {
+
+        $output = count($libraryToBooksQueue) . " \n";
+
+        foreach ($libraryToBooksQueue as $libraryId => $bookIds) {
+            $output .= $libraryId . " " . count($bookIds) . "\n";
+            $output .= implode(" ", $bookIds) . "\n";
+        }
+
+        file_put_contents($file, $output);
     }
 
 }
