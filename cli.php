@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require "input.php";
+require "verndor/autoload.php";
 
 // check if argument passed
 if ($argc < 2) {

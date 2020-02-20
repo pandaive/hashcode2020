@@ -1,13 +1,5 @@
 <?php
 
-class Library {
-
-    public $onboardingTime = 0;
-    public $booksPerDay = 0;
-    public $bookIds = [];
-
-}
-
 class Scanning {
 
     public $days = 0;
